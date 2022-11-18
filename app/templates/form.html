@@ -42,7 +42,7 @@
 <div class="box1">
     <a href="/">&lt;Back</a>
     <div class="draft">
-        <form action="{{ url_for('myview.post_time_line_post') }}" method="post">
+        <form action="{{ url_for('.post_fellow_entries', _method='POST') }}" method="post">
             <label for="name">Name</label>
             <input type="text" name="name" style="background-color: black; color:#39e75f" autocomplete="off"><br>
             <label for="batch">Batch</label>

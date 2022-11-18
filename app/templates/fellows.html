@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: white;
+            align-items: center;
+            margin-top: 100px;
+        }
+        
+        h1,
+        p,
+        li,
+        h2,
+        a,
+        label {
+            color: #39e75f;
+            font-family: 'Patrick Hand', cursive;
+        }
+        
+        .box1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 50%;
+            line-height: 80%;
+            size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <a href="/">&lt;Back</a><br>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for availability..">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for interest..">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for skills.."> {% for post in posts[0:10] %}
+        <div class="card">
+            <p>{{ post.name }} [ {{ post.batch }} ]: {{ post.availability}}</p>
+            <p>{{ post.interest }} [ {{ post.skills }} ]: {{ post.website}}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>

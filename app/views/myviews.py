@@ -5,18 +5,12 @@ import os
 
 my_view = Blueprint('my_view', __name__)
 
-# Routing 
+
+
+# Routes
 @my_view.route('/')
 def index():
     return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), users=users)
-
-@my_view.route('/timeline')
-def timeline():
-    posts = [
-        model_to_dict(p)
-        for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
-    ]
-    return render_template('timeline.html', title="Timeline", posts=posts)
 
 @my_view.route('/fellows')
 def fellows():
@@ -42,10 +36,17 @@ def user(id):
     except Exception as e:
         return f"User not found! {id}"
 
+@my_view.route('/timeline')
+def timeline():
+    posts = [
+        model_to_dict(p)
+        for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+    ]
+    return render_template('timeline.html', title="Timeline", posts=posts)
 
-# Fellow entries API
-@my_view.route('/api/fellow_entry', methods=['POST'])
-def post_time_line_post():
+# Fellow-entries API
+@my_view.route('/fellow/create/', methods=['POST'])
+def post_fellow_entries():
 
     name = request.form['name']
     batch = request.form['batch']
@@ -55,13 +56,61 @@ def post_time_line_post():
     website = request.form['website']
 
     fellow_entry = FellowEntry.create(name=name, batch=batch, availability=availability, interest=interest, skills=skills, website=website )
-    return model_to_dict(fellow_entry)
+    return render_template('create_fellow.html', title="New Fellow", fellow=fellow_entry)
 
 @my_view.route('/api/fellow_entry', methods=['GET'])
-def get_time_line_post():
+def get_fellow_entries():
     return {
         'fellow_entry': [
             model_to_dict(p)
             for p in FellowEntry.select().order_by(FellowEntry.created_at.desc())
         ]
     }
+
+# Timeline API
+@my_view.route('/api/timeline_post', methods=['POST'])
+def post_time_line_post():
+    try:
+        name = request.form['name']
+    except Exception as e:
+        return "Invalid name", 400
+    else:
+        if name == '':
+            return "Invalid name", 400
+    
+    try:
+        email = request.form['email']
+    except Exception as e:
+        return "Invalid email", 400
+    else:
+        if email == '':
+            return "Invalid email", 400
+
+    try:
+        content = request.form['content']
+    except Exception as e:
+        return "Invalid content", 400
+    else:
+        if content == '':
+            return "Invalid content", 400
+
+    # if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
+    #     return "Invalid email", 400
+
+    timeline_post = TimelinePost.create(name=name, email=email, content=content)
+    return model_to_dict(timeline_post)
+
+@my_view.route('/api/timeline_post', methods=['GET'])
+def get_time_line_post():
+    return {
+        'timeline_posts': [
+            model_to_dict(p)
+            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+        ]
+    }
+    
+@my_view.route('/api/timeline_post/', methods=['DELETE'])
+def delete_time_line_post():
+    obj = TimelinePost.get(TimelinePost.name=="test")
+    obj.delete_instance()
+    return print(f"Deleted test record")
