@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: black;
+            align-items: center;
+            margin-top: 100px;
+        }
+        
+        h1,
+        p,
+        li,
+        h2,
+        a,
+        label {
+            color: #39e75f;
+            font-family: 'Patrick Hand', cursive;
+        }
+        
+        .box1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 50%;
+            line-height: 80%;
+        }
+    </style>
+</head>
+
+
+
+
+<div class="box1">
+    <a href="/">&lt;Back</a>
+    <div class="draft">
+        <form action="{{ url_for('myview.post_time_line_post') }}" method="post">
+            <label for="name">Name</label>
+            <input type="text" name="name" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="batch">Batch</label>
+            <input type="text" name="batch" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="availability">Availability</label>
+            <input type="text" name="availability" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="interest">Interest</label>
+            <input type="text" name="interest" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="skills">Skills</label>
+            <input type="text" name="skills" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="website">Website</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <input type="submit" style="background-color: black; color: #39e75f; border-radius: 2px">
+            <br><br>
+        </form>
+    </div>
+</div>
