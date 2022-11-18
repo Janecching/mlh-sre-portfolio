@@ -12,21 +12,26 @@ my_view = Blueprint('my_view', __name__)
 def index():
     return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), users=users)
 
-@my_view.route('/fellows')
+@my_view.route('/fellows', methods=["GET", "POST"])
 def fellows():
-    posts = [
-        model_to_dict(p)
-        for p in FellowEntry.select().order_by(FellowEntry.created_at.desc())
-    ]
-    return render_template('fellows.html', title="Fellows", posts=posts)
+    if request.form:
+        # TODO filter query by form params
+        fellows = list( FellowEntry.select().where(
+            
+            FellowEntry.availability == request.form['availability'],
+            FellowEntry.interest == request.form['interest'],
+            FellowEntry.skills == request.form['skills']
+            ))
+    else:
+        fellows = [
+            model_to_dict(f)
+            for f in FellowEntry.select().order_by(FellowEntry.created_at.desc())
+        ]
+    return render_template('fellows.html', title="Fellows", fellows=fellows)
 
 @my_view.route('/form')
 def form():
-    posts = [
-        model_to_dict(p)
-        for p in FellowEntry.select().order_by(FellowEntry.created_at.desc())
-    ]
-    return render_template('form.html', title="Form", posts=posts)
+    return render_template('form.html', title="Form")
 
 @my_view.route('/user/<id>/')
 def user(id):

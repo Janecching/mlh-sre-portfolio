@@ -6,7 +6,7 @@
 
     <style>
         body {
-            background-color: white;
+            background-color: black;
             align-items: center;
             margin-top: 100px;
         }
@@ -40,12 +40,49 @@
 <body>
     <div class="box1">
         <a href="/">&lt;Back</a><br>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for availability..">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for interest..">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for skills.."> {% for post in posts[0:10] %}
+
+        <form action="{{ url_for('.fellows') }}" method="post">
+            <!-- <label for="name">Name:</label>
+            <input type="text" name="name" placeholder="name"> -->
+            <label for="availability">Availability:</label>
+            <select name="availability" id="availability">
+              <option value="spring23">Spring 2023 Internship</option>
+              <option value="summer23">Summer 2023 Internship</option>
+              <option value="fall23">Fall 2023 Internship</option>
+              <option value="fulltime">Full Time ASAP</option>
+            </select>
+            <label for="interest">Interests:</label>
+            <select name="interest" id="interest">
+              <option value="frontend">Front-end</option>
+              <option value="backend">Back-end</option>
+              <option value="mobile">Mobile</option>
+              <option value="sre">SRE/PE</option>
+            </select>
+            <label for="skills">Skills:</label>
+            <select name="skills" id="skills">
+              <option value="python">Python</option>
+              <option value="javascript">JavaScript</option>
+              <option value="c++">C++</option>
+              <option value="swift">Swift</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+        {% for fellow in fellows[0:10] %}
         <div class="card">
-            <p>{{ post.name }} [ {{ post.batch }} ]: {{ post.availability}}</p>
-            <p>{{ post.interest }} [ {{ post.skills }} ]: {{ post.website}}</p>
+            <p>{{ fellow.name }} [ {{ fellow.batch }} ]: {{ fellow.availability}}</p>
+            <p>{{ fellow.interest }} [ {{ fellow.skills }} ]: {{ fellow.website}}</p>
         </div>
         {% endfor %}
     </div>
