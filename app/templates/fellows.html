@@ -42,8 +42,8 @@
         <a href="/">&lt;Back</a><br>
 
         <form action="{{ url_for('.fellows') }}" method="post">
-            <!-- <label for="name">Name:</label>
-            <input type="text" name="name" placeholder="name"> -->
+            <label for="name">Name:</label>
+            <input type="text" name="name" placeholder="name">
             <label for="availability">Availability:</label>
             <select name="availability" id="availability">
               <option value="spring23">Spring 2023 Internship</option>
@@ -81,8 +81,7 @@
 
         {% for fellow in fellows[0:10] %}
         <div class="card">
-            <p>{{ fellow.name }} [ {{ fellow.batch }} ]: {{ fellow.availability}}</p>
-            <p>{{ fellow.interest }} [ {{ fellow.skills }} ]: {{ fellow.website}}</p>
+            <p>{{ fellow.name }}, {{ fellow.batch }}, {{ fellow.availability}}, {{ fellow.interest }}, {{ fellow.skills }}, {{ fellow.website}}</p>
         </div>
         {% endfor %}
     </div>

@@ -42,17 +42,35 @@
 <div class="box1">
     <a href="/">&lt;Back</a>
     <div class="draft">
-        <form action="{{ url_for('.post_fellow_entries', _method='POST') }}" method="post">
+        <form action="{{ url_for('.post_fellow_entries', _method='POST') }}" method="post" id="form">
             <label for="name">Name</label>
             <input type="text" name="name" style="background-color: black; color:#39e75f" autocomplete="off"><br>
             <label for="batch">Batch</label>
             <input type="text" name="batch" style="background-color: black; color:#39e75f" autocomplete="off"><br>
             <label for="availability">Availability</label>
-            <input type="text" name="availability" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <select name="availability" id="availability" form="form">
+                <option value="spring23">Spring 2023 Internship</option>
+              <option value="summer23">Summer 2023 Internship</option>
+              <option value="fall23">Fall 2023 Internship</option>
+              <option value="fulltime">Full Time ASAP</option>
+              </select><br>
+            <!-- <input type="text" name="availability" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
             <label for="interest">Interest</label>
-            <input type="text" name="interest" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <select name="interest" id="interest">
+                <option value="frontend">Front-end</option>
+                <option value="backend">Back-end</option>
+                <option value="mobile">Mobile</option>
+                <option value="sre">SRE/PE</option>
+              </select><br>
+            <!-- <input type="text" name="interest" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
             <label for="skills">Skills</label>
-            <input type="text" name="skills" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <select name="skills" id="skills">
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+                <option value="c++">C++</option>
+                <option value="swift">Swift</option>
+              </select><br>
+            <!-- <input type="text" name="skills" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
             <label for="website">Website</label>
             <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
             <input type="submit" style="background-color: black; color: #39e75f; border-radius: 2px">

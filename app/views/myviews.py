@@ -17,10 +17,10 @@ def fellows():
     if request.form:
         # TODO filter query by form params
         fellows = list( FellowEntry.select().where(
-            
-            FellowEntry.availability == request.form['availability'],
-            FellowEntry.interest == request.form['interest'],
-            FellowEntry.skills == request.form['skills']
+            (FellowEntry.name ** request.form['name']) |
+            (FellowEntry.availability == request.form['availability']) &
+            (FellowEntry.interest == request.form['interest']) &
+            (FellowEntry.skills == request.form['skills'])
             ))
     else:
         fellows = [
