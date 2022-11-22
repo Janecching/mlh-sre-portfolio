@@ -10,14 +10,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+
+
     <title>{{ title }}</title>
 
     <style>
         body {
-            background-color: black;
             align-items: center;
             margin-top: 100px;
+            background-color: rgb(44, 82, 154);
+            background-image: url('app/static/img/background.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
         }
         
         h1,
@@ -26,28 +32,70 @@
         h2,
         a,
         label {
-            color: #39e75f;
-            font-family: 'Patrick Hand', cursive;
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            text-decoration: none;
         }
         
-        .box1 {
+        .yellow {
+            color: rgb(238, 188, 76);
+        }
+        
+        .box {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .buttons {
+            display: inline;
+        }
+        
+        button[name="button1"] {
+            display: block;
+            width: 120px;
+            height: 40px;
+            background: rgb(238, 188, 76);
+            border-radius: 20px;
+            border: solid;
+            border-color: black;
+            border-width: 1px;
+            font-family: 'Open Sans', sans-serif;
+            display: inline;
+        }
+        
+        button[name="button2"] {
+            display: block;
+            width: 120px;
+            height: 35px;
+            background: rgb(44, 82, 154);
+            border: solid;
+            border-radius: 20px;
+            border-color: white;
+            color: white;
+            border-width: 1px;
+            font-family: 'Open Sans', sans-serif;
+            display: inline;
         }
     </style>
 </head>
 
 <body>
     <!-- <div class="profile"> -->
-    <div class="box1">
+    <div class="box">
         <!-- <img src="static/img/logo_chicken.png" alt="Know Your Chicken Logo" class="profile-img" /> {% for user in users %} -->
         <!-- <div class="img"> -->
-        <p>MLH SRE Resume Book</p>
-        <a href="/fellows">Recruiter</a>
-        <a href="/form">Fellow</a>
-        <a href="/timeline">Timeline</a>
+        <h1>MLH Fellows <span class="yellow">Resume Book</span></h1>
+        <p>I am a... </p><br>
+        <div class="buttons">
+            <a href="/fellows"><button name="button1">Recruiter</button></a>
+            <a href="/form">
+                <button name="button2">Fellow</button>
+            </a>
+        </div>
+
 
     </div>
     <!-- <p>{{user.name}}</p>
@@ -56,5 +104,6 @@
     <!-- </div> -->
     <!-- </div> -->
 </body>
+
 
 </html>

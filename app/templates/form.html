@@ -46,17 +46,23 @@
             <label for="name">Name</label>
             <input type="text" name="name" style="background-color: black; color:#39e75f" autocomplete="off"><br>
             <label for="batch">Batch</label>
-            <input type="text" name="batch" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <!-- <input type="text" name="batch" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
+            <select name="batch" id="batch" form="form" multiple>
+                <option value="spring22batch">Spring 2022 Batch</option>
+              <option value="summer22batch">Summer 2022 Batch</option>
+              <option value="fall22batch">Fall 2022 Batch</option>
+              <option value="spring23batch">Spring 2023 Batch</option>
+              </select><br>
             <label for="availability">Availability</label>
-            <select name="availability" id="availability" form="form">
-                <option value="spring23">Spring 2023 Internship</option>
-              <option value="summer23">Summer 2023 Internship</option>
-              <option value="fall23">Fall 2023 Internship</option>
+            <select name="availability" id="availability" form="form" multiple>
+                <option value="spring23intern">Spring 2023 Internship</option>
+              <option value="summer23intern">Summer 2023 Internship</option>
+              <option value="fall23intern">Fall 2023 Internship</option>
               <option value="fulltime">Full Time ASAP</option>
               </select><br>
             <!-- <input type="text" name="availability" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
             <label for="interest">Interest</label>
-            <select name="interest" id="interest">
+            <select name="interest" id="interest" multiple>
                 <option value="frontend">Front-end</option>
                 <option value="backend">Back-end</option>
                 <option value="mobile">Mobile</option>
@@ -64,17 +70,42 @@
               </select><br>
             <!-- <input type="text" name="interest" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
             <label for="skills">Skills</label>
-            <select name="skills" id="skills">
+            <select name="skills" id="skills" multiple>
                 <option value="python">Python</option>
                 <option value="javascript">JavaScript</option>
                 <option value="c++">C++</option>
                 <option value="swift">Swift</option>
               </select><br>
             <!-- <input type="text" name="skills" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
+            <label for="website">Linkedin</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="website">Github</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+
+
+
+
             <label for="website">Website</label>
             <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <input type="checkbox" id="need-template" name="need-template" value="need-template">
+            <label for="need-template"> I do not have my own website, please create a template for me. </label><br>
+
+
+            <!-- appears if checkbox is clicked   -->
+            <label for="website">About</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="website">Work</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="website">Education</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="website">Hobbies</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+            <label for="website">Visited</label>
+            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+
+
+
             <input type="submit" style="background-color: black; color: #39e75f; border-radius: 2px">
-            <br><br>
         </form>
     </div>
 </div>
