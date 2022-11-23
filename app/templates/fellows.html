@@ -1,116 +1,248 @@
 <!DOCTYPE html>
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+
+
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
+        
+        html,
         body {
-            background-color: black;
-            align-items: center;
-            margin-top: 100px;
+            min-height: 100vh;
+            background-color: rgb(44, 82, 154);
+        }
+        
+        .column {
+            display: grid;
+            padding: 10%;
         }
         
         h1,
-        p,
-        li,
-        h2,
         a,
         label {
-            color: #39e75f;
-            font-family: 'Patrick Hand', cursive;
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            text-decoration: none;
         }
         
-        .box1 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        p {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0 0 2px 2px;
+        }
+        
+        h5 {
+            font-family: 'Open Sans', sans-serif;
+            size: small;
+            font-weight: normal;
+            border-radius: 7px;
+            margin: 0 0 2px 2px;
+            border: 1px;
+            border-style: solid;
+            border-color: rgb(154, 227, 217);
+        }
+        
+        .yellow {
+            color: rgb(238, 188, 76);
+        }
+        
+        .row0 {
+            margin: 0 0 10px 0;
+        }
+        
+        .row1 {
+            margin: 0 0 50px 0;
+        }
+        
+        .search1,
+        .search2,
+        .search3 {
+            float: left;
+            width: 305px;
+            margin: 0 20px 0 0;
+        }
+        
+        .search4 {
+            float: left;
+            margin: 20px 0 0 0;
+        }
+        
+        .card-container {
+            display: grid;
         }
         
         .card {
-            box-shadow: 0 4px 8px 0 #39e75f;
-            width: 100%;
-            size: 10px;
+            background-color: whitesmoke;
             transition: 0.3s;
-            padding: 2px 16px;
-            border: #39e75f;
+            margin: 0 0 20px 0;
+            padding: 10px;
+            border: black;
+            border-width: 0.5px;
+            border-style: solid;
+            border-radius: 10px;
+            align-items: center;
         }
         
         .card:hover {
-            box-shadow: 0 8px 16px 0 #39e75f;
+            box-shadow: 5px 5px 5px 0 rgb(221, 255, 255);
+        }
+        
+        .col1 {
+            float: left;
+        }
+        
+        .col2 {
+            float: right;
+        }
+        
+        input[type=submit] {
+            display: block;
+            width: 100px;
+            height: 40px;
+            background: rgb(238, 188, 76);
+            border-radius: 20px;
+            border: solid;
+            border-color: black;
+            border-width: 1px;
+            font-family: 'Open Sans', sans-serif;
+            display: inline;
+        }
+        
+        button[name=link] {
+            display: block;
+            width: 100px;
+            height: 40px;
+            background: rgb(44, 82, 154);
+            border: solid;
+            border-radius: 20px;
+            border-color: white;
+            color: white;
+            border-width: 1px;
+            font-family: 'Open Sans', sans-serif;
+            display: inline;
         }
     </style>
 </head>
 
 <body>
-    <div class="box1">
-        <a href="/">&lt;Back</a><br>
-
-        <form action="{{ url_for('.fellows') }}" method="post">
-            <!-- <label for="name">Name:</label>
-            <input type="text" name="name" placeholder="name"> -->
-            <label for="availability">Availability:</label>
-            <select name="availability" id="availability" multiple>
-              <option value="spring23">Spring 2023 Internship</option>
-              <option value="summer23">Summer 2023 Internship</option>
-              <option value="fall23">Fall 2023 Internship</option>
-              <option value="fulltime">Full Time ASAP</option>
-            </select>
-            <label for="interest">Interests:</label>
-            <select name="interest" id="interest" multiple>
-              <option value="frontend">Front-end</option>
-              <option value="backend">Back-end</option>
-              <option value="mobile">Mobile</option>
-              <option value="sre">SRE/PE</option>
-            </select>
-            <label for="skills">Skills:</label>
-            <select name="skills" id="skills" multiple>
-              <option value="python">Python</option>
-              <option value="javascript">JavaScript</option>
-              <option value="c++">C++</option>
-              <option value="swift">Swift</option>
-            </select>
-            <input type="submit" value="Submit">
-        </form>
+    <div class="column">
 
 
-
-
-
-
-
-
-
-
-
-
-        {% for fellow in fellows[0:10] %}
-        <div class="card">
-            <p>{{ fellow.name }}, {{ fellow.batch }}, {{ fellow.availability }}, {{ fellow.interest }}, {{ fellow.skills }}, {{ fellow.website }}</p>
+        <div class="row0">
+            <a href="{{url_for('.index')}}"> <u>&ltHome</u></a>
+            <h1>Search for <span class="yellow">MLH Fellows</span></h1>
         </div>
-        {% endfor %}
+
+        <div class="row1">
+
+
+            <form action="{{ url_for('.fellows') }}" method="post">
+                <div class="search1">
+                    <label for="availability">Availability:</label>
+                    <select name="availability" id="availability" multiple>
+                  <option value="spring23">Spring 2023 Internship</option>
+                  <option value="summer23">Summer 2023 Internship</option>
+                  <option value="fall23">Fall 2023 Internship</option>
+                  <option value="fulltime">Full Time ASAP</option>
+                </select>
+                </div>
+
+                <div class="search2">
+                    <label for="interest">Interests:</label>
+                    <select name="interest" id="interest" multiple>
+                  <option value="frontend">Front-end</option>
+                  <option value="backend">Back-end</option>
+                  <option value="mobile">Mobile</option>
+                  <option value="sre">SRE/PE</option>
+                </select>
+                </div>
+
+                <div class="search3">
+                    <label for="skills">Skills:</label>
+                    <select name="skills" id="skills" multiple>
+                  <option value="python">Python</option>
+                  <option value="javascript">JavaScript</option>
+                  <option value="c++">C++</option>
+                  <option value="swift">Swift</option>
+                </select>
+                </div>
+
+                <div class="search4">
+                    <input type="submit" value="Submit">
+
+                </div>
+            </form>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="row3">
+            <div class="card-container">
+                {% for fellow in fellows[0:10] %}
+                <div class="card">
+                    <div class="col1">
+                        <p><b>{{ fellow.name }}</b> - {{ fellow.batch }}</p>
+                        <div style="display: flex; justify-content: space-between;">
+                            <h5 style="border:none">Seeking:</h5>
+                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">&nbsp{{ fellow.availability }}&nbsp</h5>
+                            <h5 style="border:none">&nbsp Interested in:</h5>
+                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">&nbsp{{ fellow.interest }}&nbsp</h5>
+                            <h5 style="border:none">&nbsp Skilled in: </h5>
+                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">&nbsp{{ fellow.skills }}&nbsp</h5>
+                        </div>
+                    </div>
+
+
+                    <div class="col2">
+                        <a href="{{ fellow.website }}"><button name="link">Linkedin</button></a>
+                        <a href="{{ fellow.website }}"><button name="link">Github</button></a>
+                        <a href="{{ fellow.website }}"><button name="link">Portfolio</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
-    <script>
-        function myFunction() {
-            // Declare variables
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName('li');
 
-            // Loop through all list items, and hide those who don't match the search query
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-        }
+
+
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+    <script>
+        new MultiSelectTag('availability', {
+            rounded: true, // default true
+        })
+
+        new MultiSelectTag('interest', {
+            rounded: true, // default true
+        })
+
+        new MultiSelectTag('skills', {
+            rounded: true, // default true
+        })
     </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>

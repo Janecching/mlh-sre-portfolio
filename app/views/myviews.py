@@ -49,7 +49,7 @@ def timeline():
     ]
     return render_template('timeline.html', title="Timeline", posts=posts)
 
-# Fellow-entries API
+# Fellow-entries
 @my_view.route('/fellow/create/', methods=['POST'])
 def post_fellow_entries():
 
