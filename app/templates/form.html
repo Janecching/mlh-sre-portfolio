@@ -1,111 +1,169 @@
 <!DOCTYPE html>
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
+        
+        html,
         body {
-            background-color: black;
-            align-items: center;
-            margin-top: 100px;
+            min-height: 100vh;
+            background-color: rgb(44, 82, 154);
         }
         
-        h1,
-        p,
-        li,
-        h2,
+        .column {
+            display: grid;
+            padding: 10%;
+        }
+        
         a,
+        h1 {
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            text-decoration: none;
+        }
+        
+        option,
         label {
-            color: #39e75f;
-            font-family: 'Patrick Hand', cursive;
+            font-family: 'Open Sans', sans-serif;
+            text-decoration: none;
         }
         
-        .box1 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .form-container {
+            background-color: white;
+            display: grid;
+            border: black;
+            border-style: solid;
+            border-radius: 10px;
+            border-width: 1px;
+            padding: 30px;
         }
         
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            width: 50%;
-            line-height: 80%;
+        .yellow {
+            color: rgb(238, 188, 76);
+        }
+        
+        .row0 {
+            margin: 0 0 20px 0;
+        }
+        
+        input[type=text] {
+            display: block;
+            width: 100%;
+            height: 35px;
+            background: white;
+            border-radius: 5px;
+            border: solid;
+            border-color: rgb(220, 221, 224);
+            border-width: 1px;
+            font-family: 'Open Sans', sans-serif;
+            display: inline;
+            margin: 0 0 15px 0;
+        }
+        
+        input[type=submit] {
+            display: block;
+            width: 100px;
+            height: 40px;
+            background: rgb(238, 188, 76);
+            border-radius: 20px;
+            border: solid;
+            border-color: black;
+            border-width: 1px;
+            font-family: 'Open Sans', sans-serif;
+            display: inline;
         }
     </style>
 </head>
 
 
 
+<body>
+    <div class="column">
+        <div class="row0">
+            <a href="{{url_for('.index')}}"> <u>&lt Home</u></a>
+            <h1>Enter your <span class="yellow">info </span>here</h1>
+        </div>
 
-<div class="box1">
-    <a href="/">&lt;Back</a>
-    <div class="draft">
-        <form action="{{ url_for('.post_fellow_entries', _method='POST') }}" method="post" id="form">
-            <label for="name">Name</label>
-            <input type="text" name="name" style="background-color: black; color:#39e75f" autocomplete="off"><br>
-            <label for="batch">Batch</label>
-            <!-- <input type="text" name="batch" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
-            <select name="batch" id="batch" form="form">
+        <div class="row1">
+            <div class="form-container">
+                <form action="{{ url_for('.post_fellow_entries', _method='POST') }}" method="post" id="form">
+                    <label for="name">Name</label><br>
+                    <input type="text" name="name" autocomplete="off"><br>
+
+                    <label for="batch">Batch</label>
+                    <!-- <input type="text" name="batch" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
+                    <select name="batch" id="batch" form="form" multiple>
                 <option value="Spring 2022">Spring 2022</option>
               <option value="Summer 2022">Summer 2022</option>
               <option value="Fall 2022">Fall 2022</option>
               <option value="Spring 2023">Spring 2023</option>
               </select><br>
-            <label for="availability">Availability</label>
-            <select name="availability" id="availability" form="form" multiple>
-                <option value="Spring23 Intern">Spring23 Intern</option>
-              <option value="Summer23 Intern">Summer23 Intern</option>
-              <option value="Fall23 Intern">Fall23 Intern</option>
+                    <label for="availability">Availability</label>
+                    <select name="availability" id="availability" form="form" multiple>
+                <option value="Spring23 Intern">Spring 2023 Internship</option>
+              <option value="Summer23 Intern">Summer 2023 Internship</option>
+              <option value="Fall23 Intern">Fall 2023 Internship</option>
               <option value="Full Time ASAP">Full Time ASAP</option>
               </select><br>
-            <!-- <input type="text" name="availability" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
-            <label for="interest">Interest</label>
-            <select name="interest" id="interest" multiple>
+                    <!-- <input type="text" name="availability" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
+                    <label for="interest">Interest</label>
+                    <select name="interest" id="interest" multiple>
                 <option value="Front-end">Front-end</option>
                 <option value="Back-end">Back-end</option>
                 <option value="Mobile">Mobile</option>
                 <option value="SRE/PE">SRE/PE</option>
               </select><br>
-            <!-- <input type="text" name="interest" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
-            <label for="skills">Skills</label>
-            <select name="skills" id="skills" multiple>
+                    <!-- <input type="text" name="interest" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
+                    <label for="skills">Skills</label>
+                    <select name="skills" id="skills" multiple>
                 <option value="Python">Python</option>
                 <option value="JavaScript">JavaScript</option>
                 <option value="C++">C++</option>
                 <option value="Swift">Swift</option>
               </select><br>
-            <!-- <input type="text" name="skills" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
-            <label for="linkedin">Linkedin</label>
-            <input type="text" name="linkedin" style="background-color: black; color:#39e75f" autocomplete="off"><br>
-            <label for="github">Github</label>
-            <input type="text" name="github" style="background-color: black; color:#39e75f" autocomplete="off"><br>
-            <label for="portfolio">Portfolio</label>
-            <input type="text" name="portfolio" style="background-color: black; color:#39e75f" autocomplete="off"><br>
+                    <!-- <input type="text" name="skills" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
+                    <label for="linkedin">Linkedin Link</label><br>
+                    <input type="text" name="linkedin" autocomplete="off"><br>
+                    <label for="github">Github Link</label><br>
+                    <input type="text" name="github" autocomplete="off"><br>
+                    <label for="portfolio">Portfolio Link</label><br>
+                    <input type="text" name="portfolio" autocomplete="off"><br>
 
-
-
-
-            <!--<input type="checkbox" id="need-template" name="need-template" value="need-template">
-            <label for="need-template"> I do not have my own website, please create a template for me. </label><br>
-
-
-
-            <label for="website">About</label>
-            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
-            <label for="website">Work</label>
-            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
-            <label for="website">Education</label>
-            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
-            <label for="website">Hobbies</label>
-            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br>
-            <label for="website">Visited</label>
-            <input type="text" name="website" style="background-color: black; color:#39e75f" autocomplete="off"><br> -->
-
-
-
-            <input type="submit" style="background-color: black; color: #39e75f; border-radius: 2px">
-        </form>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
     </div>
-</div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+    <script>
+        new MultiSelectTag('batch', {
+            rounded: true, // default true
+        })
+
+        new MultiSelectTag('availability', {
+            rounded: true, // default true
+        })
+
+        new MultiSelectTag('interest', {
+            rounded: true, // default true
+        })
+
+        new MultiSelectTag('skills', {
+            rounded: true, // default true
+        })
+    </script>
+</body>

@@ -57,7 +57,7 @@
         }
         
         .row0 {
-            margin: 0 0 10px 0;
+            margin: 0 0 20px 0;
         }
         
         .row1 {
@@ -84,7 +84,7 @@
         .card {
             background-color: whitesmoke;
             transition: 0.3s;
-            margin: 0 0 20px 0;
+            margin: 0 20px 10px 0;
             padding: 10px;
             border: black;
             border-width: 0.5px;
@@ -139,41 +139,42 @@
 
 
         <div class="row0">
-            <a href="{{url_for('.index')}}"> <u>&ltHome</u></a>
+            <a href="{{url_for('.index')}}"> <u>&lt Home</u></a>
             <h1>Search for <span class="yellow">MLH Fellows</span></h1>
         </div>
 
         <div class="row1">
+            <!-- <div style="display: flex; justify-content: space-between;"> -->
 
 
             <form action="{{ url_for('.fellows') }}" method="post">
                 <div class="search1">
                     <label for="availability">Availability:</label>
                     <select name="availability" id="availability" multiple>
-                  <option value="spring23">Spring 2023 Internship</option>
-                  <option value="summer23">Summer 2023 Internship</option>
-                  <option value="fall23">Fall 2023 Internship</option>
-                  <option value="fulltime">Full Time ASAP</option>
+                        <option value="Spring23 Intern">Spring 2023 Internship</option>
+                        <option value="Summer23 Intern">Summer 2023 Internship</option>
+                        <option value="Fall23 Intern">Fall 2023 Internship</option>
+                        <option value="Full Time ASAP">Full Time ASAP</option>
                 </select>
                 </div>
 
                 <div class="search2">
                     <label for="interest">Interests:</label>
                     <select name="interest" id="interest" multiple>
-                  <option value="frontend">Front-end</option>
-                  <option value="backend">Back-end</option>
-                  <option value="mobile">Mobile</option>
-                  <option value="sre">SRE/PE</option>
+                        <option value="Front-end">Front-end</option>
+                        <option value="Back-end">Back-end</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="SRE/PE">SRE/PE</option>
                 </select>
                 </div>
 
                 <div class="search3">
                     <label for="skills">Skills:</label>
                     <select name="skills" id="skills" multiple>
-                  <option value="python">Python</option>
-                  <option value="javascript">JavaScript</option>
-                  <option value="c++">C++</option>
-                  <option value="swift">Swift</option>
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="C++">C++</option>
+                        <option value="Swift">Swift</option>
                 </select>
                 </div>
 
@@ -183,7 +184,7 @@
                 </div>
             </form>
 
-
+            <!-- </div> -->
         </div>
 
 
@@ -199,7 +200,7 @@
 
         <div class="row3">
             <div class="card-container">
-                {% for fellow in fellows[0:10] %}
+                {% for fellow in fellows[0:7] %}
                 <div class="card">
                     <div class="col1">
                         <p><b>{{ fellow.name }}</b> - {{ fellow.batch[2:-2] }}</p>
@@ -221,9 +222,9 @@
 
 
                     <div class="col2">
-                        <a href="{{ fellow.website }}"><button name="link">Linkedin</button></a>
-                        <a href="{{ fellow.website }}"><button name="link">Github</button></a>
-                        <a href="{{ fellow.website }}"><button name="link">Portfolio</button></a>
+                        <a href="{{ fellow.linkedin }}"><button name="link">Linkedin</button></a>
+                        <a href="{{ fellow.github }}"><button name="link">Github</button></a>
+                        <a href="{{ fellow.portfolio }}"><button name="link">Portfolio</button></a>
                     </div>
                 </div>
                 {% endfor %}

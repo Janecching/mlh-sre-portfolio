@@ -15,12 +15,10 @@ def index():
 @my_view.route('/fellows', methods=["GET", "POST"])
 def fellows():
     if request.form:
-        # TODO filter query by form params
         fellows = list( FellowEntry.select().where(
-            # (FellowEntry.name ** request.form['name']) |
-            (FellowEntry.availability == request.form['availability']) &
-            (FellowEntry.interest == request.form['interest']) &
-            (FellowEntry.skills == request.form['skills'])
+            (request.form.getlist('availability') in FellowEntry.availability) &
+            (request.form.getlist('interest') in FellowEntry.interest) &
+            (request.form.getlist('skills') in FellowEntry.skills) 
             ))
     else:
         fellows = [
