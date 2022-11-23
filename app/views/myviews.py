@@ -54,13 +54,15 @@ def timeline():
 def post_fellow_entries():
 
     name = request.form['name']
-    batch = request.form['batch']
-    availability = request.form['availability']
-    interest = request.form['interest']
-    skills = request.form['skills']
-    website = request.form['website']
+    batch = request.form.getlist('batch')
+    availability = request.form.getlist('availability')
+    interest = request.form.getlist('interest')
+    skills = request.form.getlist('skills')
+    linkedin = request.form['linkedin']
+    github = request.form['github']
+    portfolio = request.form['portfolio']
 
-    fellow_entry = FellowEntry.create(name=name, batch=batch, availability=availability, interest=interest, skills=skills, website=website )
+    fellow_entry = FellowEntry.create(name=name, batch=batch, availability=availability, interest=interest, skills=skills, linkedin=linkedin, github=github, portfolio=portfolio )
     return render_template('create_fellow.html', title="New Fellow", fellow=fellow_entry)
 
 @my_view.route('/api/fellow_entry', methods=['GET'])

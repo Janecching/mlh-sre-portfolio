@@ -202,14 +202,20 @@
                 {% for fellow in fellows[0:10] %}
                 <div class="card">
                     <div class="col1">
-                        <p><b>{{ fellow.name }}</b> - {{ fellow.batch }}</p>
+                        <p><b>{{ fellow.name }}</b> - {{ fellow.batch[2:-2] }}</p>
                         <div style="display: flex; justify-content: space-between;">
                             <h5 style="border:none">Seeking:</h5>
-                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">&nbsp{{ fellow.availability }}&nbsp</h5>
+                            {% for a in fellow.availability.strip('][').split(', ') %}
+                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">{{a[1:-1]}}</h5>
+                            {% endfor %}
                             <h5 style="border:none">&nbsp Interested in:</h5>
-                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">&nbsp{{ fellow.interest }}&nbsp</h5>
+                            {% for i in fellow.interest.strip('][').split(', ') %}
+                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">{{i[1:-1]}}</h5>
+                            {% endfor %}
                             <h5 style="border:none">&nbsp Skilled in: </h5>
-                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">&nbsp{{ fellow.skills }}&nbsp</h5>
+                            {% for s in fellow.skills.strip('][').split(', ') %}
+                            <h5 style="color: rgb(71, 124, 125); background-color: rgb(235, 254, 250);">&nbsp{{s[1:-1]}}&nbsp</h5>
+                            {% endfor %}
                         </div>
                     </div>
 
