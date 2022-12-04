@@ -3,150 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/fellows.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-
-
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            box-sizing: border-box;
-        }
-        
-        html,
-        body {
-            min-height: 100vh;
-            background-color: rgb(44, 82, 154);
-        }
-        
-        .column {
-            display: grid;
-            padding: 10%;
-        }
-        
-        h1,
-        a,
-        label {
-            color: white;
-            font-family: 'Open Sans', sans-serif;
-            text-decoration: none;
-        }
-        
-        p {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0 0 2px 2px;
-        }
-        
-        h5 {
-            font-family: 'Open Sans', sans-serif;
-            size: small;
-            font-weight: normal;
-            border-radius: 7px;
-            margin: 0 0 2px 2px;
-            border: 1px;
-            border-style: solid;
-            border-color: rgb(154, 227, 217);
-        }
-        
-        .yellow {
-            color: rgb(238, 188, 76);
-        }
-        
-        .row0 {
-            margin: 0 0 20px 0;
-        }
-        
-        .row1 {
-            margin: 0 0 50px 0;
-        }
-        
-        .search1,
-        .search2,
-        .search3 {
-            float: left;
-            width: 305px;
-            margin: 0 20px 0 0;
-        }
-        
-        .search4 {
-            float: left;
-            margin: 20px 0 0 0;
-        }
-        
-        .card-container {
-            display: grid;
-        }
-        
-        .card {
-            background-color: whitesmoke;
-            transition: 0.3s;
-            margin: 0 20px 10px 0;
-            padding: 10px;
-            border: black;
-            border-width: 0.5px;
-            border-style: solid;
-            border-radius: 10px;
-            align-items: center;
-        }
-        
-        .card:hover {
-            box-shadow: 5px 5px 5px 0 rgb(221, 255, 255);
-        }
-        
-        .col1 {
-            float: left;
-        }
-        
-        .col2 {
-            float: right;
-        }
-        
-        input[type=submit] {
-            display: block;
-            width: 100px;
-            height: 40px;
-            background: rgb(238, 188, 76);
-            border-radius: 20px;
-            border: solid;
-            border-color: black;
-            border-width: 1px;
-            font-family: 'Open Sans', sans-serif;
-            display: inline;
-        }
-        
-        button[name=link] {
-            display: block;
-            width: 100px;
-            height: 40px;
-            background: rgb(44, 82, 154);
-            border: solid;
-            border-radius: 20px;
-            border-color: white;
-            color: white;
-            border-width: 1px;
-            font-family: 'Open Sans', sans-serif;
-            display: inline;
-        }
-    </style>
+    <title>Find Fellows</title>
 </head>
 
 <body>
     <div class="column">
-
-
         <div class="row0">
             <a href="{{url_for('.index')}}"> <u>&lt Home</u></a>
             <h1>Search for <span class="yellow">MLH Fellows</span></h1>
         </div>
 
+        <!-- filter HTML form  -->
         <div class="row1">
-            <!-- <div style="display: flex; justify-content: space-between;"> -->
-
-
             <form action="{{ url_for('.fellows') }}" method="post">
                 <div class="search1">
                     <label for="availability">Availability:</label>
@@ -157,7 +27,6 @@
                         <option value="Full Time ASAP">Full Time ASAP</option>
                 </select>
                 </div>
-
                 <div class="search2">
                     <label for="interest">Interests:</label>
                     <select name="interest" id="interest" multiple>
@@ -167,7 +36,6 @@
                         <option value="SRE/PE">SRE/PE</option>
                 </select>
                 </div>
-
                 <div class="search3">
                     <label for="skills">Skills:</label>
                     <select name="skills" id="skills" multiple>
@@ -177,30 +45,19 @@
                         <option value="Swift">Swift</option>
                 </select>
                 </div>
-
                 <div class="search4">
                     <input type="submit" value="Submit">
 
                 </div>
             </form>
-
-            <!-- </div> -->
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
+        <!-- fellows display-->
         <div class="row3">
             <div class="card-container">
-                {% for fellow in fellows[0:7] %}
+                <!-- display 5 fellows -->
+                {% for fellow in fellows[0:5] %}
                 <div class="card">
                     <div class="col1">
                         <p><b>{{ fellow.name }}</b> - {{ fellow.batch[2:-2] }}</p>
@@ -220,7 +77,6 @@
                         </div>
                     </div>
 
-
                     <div class="col2">
                         <a href="{{ fellow.linkedin }}"><button name="link">Linkedin</button></a>
                         <a href="{{ fellow.github }}"><button name="link">Github</button></a>
@@ -233,21 +89,12 @@
     </div>
 
 
-
-
+    <!-- js plug in -->
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
     <script>
-        new MultiSelectTag('availability', {
-            rounded: true, // default true
-        })
-
-        new MultiSelectTag('interest', {
-            rounded: true, // default true
-        })
-
-        new MultiSelectTag('skills', {
-            rounded: true, // default true
-        })
+        new MultiSelectTag('availability', {})
+        new MultiSelectTag('interest', {})
+        new MultiSelectTag('skills', {})
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

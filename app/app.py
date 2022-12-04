@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from peewee import *
 from .views.myviews import my_view
 
-# Flask 
 load_dotenv()
 app = Flask(__name__)
 app.register_blueprint(my_view)

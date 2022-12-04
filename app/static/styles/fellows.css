@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100vh;
+    background-color: rgb(44, 82, 154);
+}
+
+.column {
+    display: grid;
+    padding: 10%;
+}
+
+h1,
+a,
+label {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0 0 2px 2px;
+}
+
+h5 {
+    font-family: 'Open Sans', sans-serif;
+    size: small;
+    font-weight: normal;
+    border-radius: 7px;
+    margin: 0 0 2px 2px;
+    border: 1px;
+    border-style: solid;
+    border-color: rgb(154, 227, 217);
+}
+
+.yellow {
+    color: rgb(238, 188, 76);
+}
+
+.row0 {
+    margin: 0 0 20px 0;
+}
+
+.row1 {
+    margin: 0 0 50px 0;
+}
+
+.search1,
+.search2,
+.search3 {
+    float: left;
+    width: 305px;
+    margin: 0 20px 0 0;
+}
+
+.search4 {
+    float: left;
+    margin: 20px 0 0 0;
+}
+
+.card-container {
+    display: grid;
+}
+
+.card {
+    background-color: whitesmoke;
+    transition: 0.3s;
+    margin: 0 20px 10px 0;
+    padding: 10px;
+    border: black;
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.card:hover {
+    box-shadow: 5px 5px 5px 0 rgb(221, 255, 255);
+}
+
+.col1 {
+    float: left;
+}
+
+.col2 {
+    float: right;
+}
+
+input[type=submit] {
+    display: block;
+    width: 100px;
+    height: 40px;
+    background: rgb(238, 188, 76);
+    border-radius: 20px;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    font-family: 'Open Sans', sans-serif;
+    display: inline;
+}
+
+button[name=link] {
+    display: block;
+    width: 100px;
+    height: 40px;
+    background: rgb(44, 82, 154);
+    border: solid;
+    border-radius: 20px;
+    border-color: white;
+    color: white;
+    border-width: 1px;
+    font-family: 'Open Sans', sans-serif;
+    display: inline;
+}
