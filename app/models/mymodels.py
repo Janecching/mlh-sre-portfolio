@@ -1,5 +1,5 @@
 from peewee import (
-    SqliteDatabase, MySQLDatabase, CharField, TextField, DateTimeField, Model
+    SqliteDatabase, MySQLDatabase, CharField, BooleanField, DateTimeField, Model
 )
 import datetime
 import os
@@ -16,27 +16,32 @@ else:
         port=3306
     )
 
-# Use Peewee ORM to auto create Tables
-class TimelinePost(Model):
-    name = CharField()
-    email = CharField()
-    content = TextField()
-    created_at = DateTimeField(default=datetime.datetime.now)
-
-    class Meta:
-        database = mydb
-
+# Use Peewee ORM to auto create tables
 class FellowEntry(Model):
     name = CharField()
     batch = CharField()
     availability = CharField()
+    availability_sp23 = BooleanField()
+    availability_su23 = BooleanField()
+    availability_fa23 = BooleanField()
+    availability_ft23 = BooleanField()
     interest = CharField()
-    skills = CharField()
-    website = CharField()
+    interest_fe = BooleanField()
+    interest_be = BooleanField()
+    interest_mb = BooleanField()
+    interest_pe = BooleanField()
+    skill = CharField()
+    skill_py = BooleanField()
+    skill_js = BooleanField()
+    skill_cp = BooleanField()
+    skill_sw = BooleanField()
+    linkedin = CharField()
+    github = CharField()
+    portfolio = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = mydb
 
 
 mydb.connect()
-mydb.create_tables([TimelinePost, FellowEntry])
+mydb.create_tables([FellowEntry])

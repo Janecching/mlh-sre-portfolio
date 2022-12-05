@@ -5,80 +5,116 @@ import os
 
 my_view = Blueprint('my_view', __name__)
 
-# home
+
 @my_view.route('/')
 def index():
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"))
+    return render_template('index.html')
 
-# page to search for fellows
+
 @my_view.route('/fellows', methods=["GET", "POST"])
 def fellows():
     if request.form:
+
+        availability = request.form.getlist('availability')
+        interest = request.form.getlist('interest')
+        skill = request.form.getlist('skills')
+        print("get: ", availability, interest, skill)
+
+        query = True
+
+        if "Spring23 Intern" in availability:
+            query &= FellowEntry.availability_sp23 == True
+        if "Summer23 Intern" in availability:
+            query &= FellowEntry.availability_su23 == True 
+        if "Fall23 Intern" in availability:
+            query &= FellowEntry.availability_fa23 == True
+        if "Full Time ASAP" in availability:
+            query &= FellowEntry.availability_ft23 == True 
+        
+        # must match all entered by recruiter (if recruiter enter 2, fellow must have at least both specified)
+
+        if "Front-end" in interest:
+            query &= FellowEntry.interest_fe == True 
+        if "Back-end" in interest:
+            query &= FellowEntry.interest_be == True 
+        if "Mobile" in interest:
+            query &= FellowEntry.interest_mb == True 
+        if "SRE/PE" in interest:
+            query &= FellowEntry.interest_pe == True 
+
+        if "Python" in skill:
+            query &= FellowEntry.skill_py == True
+        if "JavaScript" in skill:
+            query &= FellowEntry.skill_js == True
+        if "C++" in skill:
+            query &= FellowEntry.skill_cp == True
+        if "Swift" in skill:
+            query &= FellowEntry.skill_sw == True
+        
         fellows = list( FellowEntry.select().where(
-            (request.form.getlist('availability') in FellowEntry.availability) &
-            (request.form.getlist('interest') in FellowEntry.interest) &
-            (request.form.getlist('skills') in FellowEntry.skills) 
-            ))
+            query 
+        ))
+
+
     else:
         fellows = [
             model_to_dict(f)
             for f in FellowEntry.select().order_by(FellowEntry.created_at.desc())
         ]
-    return render_template('fellows.html', title="Fellows", fellows=fellows)
+    return render_template('fellows.html', fellows=fellows)
 
-# page for fellows to enter details
+
 @my_view.route('/form')
 def form():
-    return render_template('form.html', title="Form")
+    return render_template('form.html')
 
-# page to confirm that fellow has been created
+
 @my_view.route('/fellow/create/', methods=['POST'])
 def post_fellow_entries():
-    try:
-        name = request.form['name']
-    except Exception as e:
-        return "Invalid name", 400
-    else:
-        if name == '':
-            return "Invalid name", 400
-
-    try:
-        linkedin = request.form['linkedin']
-    except Exception as e:
-        return "Invalid linkedin", 400
-    else:
-        if name == '':
-            return "Invalid linkedin", 400
-
-    try:
-        github = request.form['github']
-    except Exception as e:
-        return "Invalid github", 400
-    else:
-        if name == '':
-            return "Invalid github", 400
-
-    try:
-        portfolio = request.form['portfolio']
-    except Exception as e:
-        return "Invalid portfolio", 400
-    else:
-        if name == '':
-            return "Invalid portfolio", 400
-
-    batch = request.form.getlist('batch')
+    name = request.form['name']
+    batch = request.form['batch']
+    
     availability = request.form.getlist('availability')
+    availability_sp23 = True if "Spring23 Intern" in availability else False
+    availability_su23 = True if "Summer23 Intern" in availability else False 
+    availability_fa23 = True if "Fall23 Intern" in availability else False 
+    availability_ft23 = True if "Full Time ASAP" in availability else False 
+
     interest = request.form.getlist('interest')
+    interest_fe = True if "Front-end" in interest else False 
+    interest_be = True if "Back-end" in interest else False 
+    interest_mb = True if "Mobile" in interest else False 
+    interest_pe = True if "SRE/PE" in interest else False 
+
     skills = request.form.getlist('skills')
+    skill_py = True if "Python" in skills else False 
+    skill_js = True if "JavaScript" in skills else False 
+    skill_cp = True if "C++" in skills else False 
+    skill_sw = True if "Swift" in skills else False         
+    
+    linkedin = request.form['linkedin']
+    github = request.form['github']
+    portfolio = request.form['portfolio']
 
-    fellow_entry = FellowEntry.create(name=name, batch=batch, availability=availability, interest=interest, skills=skills, linkedin=linkedin, github=github, portfolio=portfolio )
-    return render_template('create_fellow.html', title="New Fellow", fellow=fellow_entry)
-
-@my_view.route('/api/fellow_entry', methods=['GET'])
-def get_fellow_entries():
-    return {
-        'fellow_entry': [
-            model_to_dict(p)
-            for p in FellowEntry.select().order_by(FellowEntry.created_at.desc())
-        ]
-    }
+    fellow_entry = FellowEntry.create(
+                    name=name, 
+                    batch=batch, 
+                    availability=availability, 
+                    availability_sp23=availability_sp23, 
+                    availability_su23=availability_su23,
+                    availability_fa23=availability_fa23,
+                    availability_ft23=availability_ft23,
+                    interest=interest,
+                    interest_fe=interest_fe,
+                    interest_be=interest_be,
+                    interest_mb=interest_mb,
+                    interest_pe=interest_pe,
+                    skill = skills,
+                    skill_py = skill_py,
+                    skill_js = skill_js,
+                    skill_cp = skill_cp,
+                    skill_sw = skill_sw,
+                    linkedin=linkedin, 
+                    github=github, 
+                    portfolio=portfolio )
+    return render_template('create_fellow.html', fellow=fellow_entry)
