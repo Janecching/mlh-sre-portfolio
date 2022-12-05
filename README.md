@@ -1,6 +1,6 @@
-# Know Your Chicken
+# Resume
 
-This is a portfolio site for team members in Fried Chicken Pod.
+Allows recruiters to look for MLH fellows and alumni's
 
 ## License
 
@@ -41,8 +41,6 @@ You should get a response like this in the terminal:
 ```
 
 You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
-
-*Note: The portfolio site will only work on your local machine while you have it running inside of your terminal. 
 
 ## Contributing
 
